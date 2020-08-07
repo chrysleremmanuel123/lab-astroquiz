@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import utility.EligibiltyCheck;
-
+import utility.EligibilityCheck;
 @WebServlet(urlPatterns= {"/eligiblemain"})
 public class Eligibility extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,7 +18,10 @@ public class Eligibility extends HttpServlet {
 
 	String points=request.getParameter("points");
 	
-	if(false)
+	EligibilityCheck check =new EligibilityCheck();
+	boolean spaceEligible = check.checkQuizAnswer(points);
+	
+	if(spaceEligible)
 	{
 		RequestDispatcher rd=this.getServletContext().getRequestDispatcher("/WEB-INF/views/success.html");
 		rd.forward(request, response);	
